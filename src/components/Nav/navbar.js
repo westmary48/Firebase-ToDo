@@ -7,11 +7,16 @@ const navbarEvents = () => {
     if (e.target.id === 'navbar-button-logout') {
       firebase.auth().signOut().then(() => {
         $('#auth').show();
+        $('#toDoPage').hide();
       }).catch((err) => {
         console.error('you still logged in', err);
       });
+    } else if (e.target.id === 'navbar-button-todo') {
+      $('#auth').hide();
+      $('#toDoPage').show();
     } else {
       $('#auth').show();
+      $('#toDoPage').hide();
     }
   });
 };
@@ -29,6 +34,9 @@ const createNavbar = () => {
             <li class="nav-item">
               <a id="navbar-button-auth" class="nav-link">Authentication</a>
             </li>
+            <li class="nav-item">
+            <a id="navbar-button-todo" class="nav-link">To Do</a>
+          </li>
             <li class="nav-item">
               <a id="navbar-button-logout" class="nav-link">Logout</a>
             </li>
