@@ -20,5 +20,6 @@ const checkLoginStatus = (initializeTasksPage) => {
     }
   });
 };
+const getCurrentUid = () => firebase.auth().currentUser.uid;
 
-export default checkLoginStatus;
+export default { checkLoginStatus, getCurrentUid };

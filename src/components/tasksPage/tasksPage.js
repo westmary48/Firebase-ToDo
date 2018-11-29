@@ -1,5 +1,4 @@
 import $ from 'jquery';
-// import { auth } from 'firebase';
 import authHelpers from '../../helpers/data/AuthHelpers';
 import tasksData from '../../helpers/data/tasksData/tasksData';
 
@@ -8,19 +7,19 @@ const printTasks = (task) => {
   const taskString = `
       <div>
         <h1>${task.task}</h1>
-        <button class="btn btn-danger delete-btn" data-delete-id=${task.task}>X</button>
-        <button class="btn btn-info edit-btn" data-edit-id=${task.task}>Edit</button>
+        <button class="btn btn-danger delete-btn" data-delete-id=${task.id}>X</button>
+        <button class="btn btn-info edit-btn" data-edit-id=${task.id}>Edit</button>
       
         <div class="form-check form-check-inline">
           <label class="form-check-label" for="inlineCheckbox1">Is this Complete?</label>
-          <input class="form-check-input is-avoiding-checkbox" type="checkbox" id="${task.task}">
+          <input class="form-check-input is-avoiding-checkbox" type="checkbox" id="${task.id}">
         </div>
         </div>
     `;
   $('#single-container').html(taskString);
-//   if (task.isAvoiding) {
-//     $('.is-avoiding-checkbox').attr('checked', true);
-//   }
+  // if (task.isAvoiding) {
+  //   $('.is-avoiding-checkbox').attr('checked', true);
+  // }
 };
 
 const getSingleTask = (e) => {
@@ -43,7 +42,7 @@ const buildDropdown = (tasksArray) => {
   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">`;
   if (tasksArray.length) {
     tasksArray.forEach((task) => {
-      dropdown += `<div class="dropdown-item get-single" data-dropdown-id=${task.id}>${task.name}</div>`;
+      dropdown += `<div class="dropdown-item get-single" data-dropdown-id=${task.id}>${task.task}</div>`;
     });
   } else {
     dropdown += '<div class="dropdown-item">You have no tasks.</div>';
