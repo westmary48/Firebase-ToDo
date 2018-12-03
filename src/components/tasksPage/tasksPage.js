@@ -4,30 +4,30 @@ import tasksData from '../../helpers/data/tasksData/tasksData';
 
 
 const printTasks = (task) => {
-  const taskString = `
-      <div>
-        <h1>${task.task}</h1>
-        <button class="btn btn-danger delete-btn" data-delete-id=${task.id}>X</button>
-        <button class="btn btn-info edit-btn" data-edit-id=${task.id}>Edit</button>
-      
-        <div class="form-check form-check-inline">
-          <label class="form-check-label" for="inlineCheckbox1">Is this Complete?</label>
-          <input class="form-check-input is-avoiding-checkbox" type="checkbox" id="${task.id}">
-        </div>
-        </div>
-    `;
-  $('#single-container').html(taskString);
-  // if (task.isAvoiding) {
-  //   $('.is-avoiding-checkbox').attr('checked', true);
-  // }
+  const newString = `
+    <div>
+      <h1>${task.isCompleted}</h1>
+      <h3>${task.task}</h3>
+      <div class="form-check form-check-inline">
+      <label class="form-check-label" for="inlineCheckbox1">Have I Completed This?</label>
+    <input class="form-check-input is-completed-checkbox" type="checkbox" id="${task.id}" value="option1">
+  </div>
+      <button class="btn btn-danger delete-btn" data-delete-id=${task.id}>Delete</button>
+      <button class="btn btn-info edit-btn" data-edit-id=${task.id}>Edit</button>
+    </div>
+  `;
+  $('#single-container').html(newString);
+  if (task.isCompleted) {
+    $('.is-completed-checkbox').attr('checked', true);
+  }
 };
 
 const getSingleTask = (e) => {
   const taskId = e.target.dataset.dropdownId;
   const uid = authHelpers.getCurrentUid();
   tasksData.getSingleTask(taskId).then((singleTask) => {
-    console.log('uid', uid);
     printTasks(singleTask);
+    console.log('uid', uid);
   })
     .catch((error) => {
       console.error('error in getting one task', error);
@@ -35,21 +35,21 @@ const getSingleTask = (e) => {
 };
 
 const buildDropdown = (tasksArray) => {
-  let dropdown = `<div class="dropdown">
+  let dropDown = `<div class="dropdown">
   <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
     Pick a Task
   </button>
   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">`;
   if (tasksArray.length) {
     tasksArray.forEach((task) => {
-      dropdown += `<div class="dropdown-item get-single" data-dropdown-id=${task.id}>${task.task}</div>`;
+      dropDown += `<div class="dropdown-item get-single" data-dropdown-id=${task.id}>${task.task}</div>`;
     });
   } else {
-    dropdown += '<div class="dropdown-item">You have no tasks.</div>';
+    dropDown += '<div class="dropdown-item">You have no tasks.</div>';
   }
 
-  dropdown += '</div></div>';
-  $('#dropdown-container').html(dropdown);
+  dropDown += '</div></div>';
+  $('#dropdown-container').html(dropDown);
 };
 
 const tasksPage = () => {

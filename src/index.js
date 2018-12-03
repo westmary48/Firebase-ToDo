@@ -14,7 +14,6 @@ const initializeApp = () => {
   createNavbar();
   AuthHelpers.checkLoginStatus(initializeTasksPage);
   loginButton();
-  // $('#add-edit-task').on('click', showTaskForm);
 };
 
 initializeApp();

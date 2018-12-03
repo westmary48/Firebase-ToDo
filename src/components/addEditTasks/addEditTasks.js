@@ -5,14 +5,15 @@ import initializeTasksPage from '../tasksPage/tasksPage';
 
 const formBuilder = (task) => {
   const form = `
-    <div class="form-group">
-      <label for="form-tasks-id">Task:</label>
-      <input type="text" class="form-control" value="${task.id}" id="form-task-task" placeholder="task">
-    </div>
-    <div class="form-group">
-      <label for="form-task-isCompleted">isCompleted:</label>
-      <input type="text" class="form-control" value="${task.task}" id="form-task-task" placeholder="walking the dog">
-    `;
+  <div class="form-group">
+    <label for="form-tasks-task">Task</label>
+    <input type="text" class="form-control" value="${task.task}" id="form-task" placeholder="Walk the dog">
+  </div>
+  <div class="form-group">
+    <label for="form-task-complete">Complete:</label>
+    <input type="text" class="form-control" value="${task.isCompleted}" id="form-task-status" placeholder="False">
+  </div>
+  `;
   return form;
 };
 
@@ -26,20 +27,19 @@ const gettingTaskFromForm = () => {
 };
 const buildAddForm = () => {
   const emptyTask = {
-    uid: '',
     task: '',
+    isCompleted: '',
   };
 
   let domString = '<h2>Add New Task</h2>';
   domString += formBuilder(emptyTask);
   domString += '<button id="add-task">Save New Task</button>';
   $('#add-edit-task').html(domString).show();
-  $('#tasks').hide();
 };
 
 const addNewTask = () => {
   const newTask = gettingTaskFromForm();
-  tasksData.addNewFriend(newTask)
+  tasksData.addNewTask(newTask)
     .then(() => {
       $('#add-edit-task').html('').hide();
       $('#tasks').show();
